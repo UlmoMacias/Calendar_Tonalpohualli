@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Proyecto1" default="all" basedir="." >
+
+  <property name="build.dir" value="build" />
+  <property name="src.dir"   value="src" />
+  <property name="doc.dir"   value="doc" />
+  <property name="resources.dir" value="resources" />
+
+  <target name="all" depends="Proyecto1.jar"/>
+
+  <target name="Proyecto1.jar" depends="compile.Proyecto1">
+    <jar jarfile="Proyecto1.jar">
+      <zipfileset dir="${build.dir}" prefix="" />
+      <fileset dir="${resources.dir}" />
+      <manifest>
+        <attribute name="Main-Class" value="Main"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="compile.Proyecto1">
+    <mkdir dir="${build.dir}"/>
+    <javac srcdir="${src.dir}"
+           destdir="${build.dir}"
+           debug="true"
+           debuglevel="lines,vars,source"
+           includeantruntime="false"
+           deprecation="true"
+           nowarn="off">
+      <compilerarg value="-Xlint:unchecked"/>
+    </javac>
+  </target>
+
+  <target name="clean">
+    <delete file="Proyecto1.jar"/>
+    <delete dir="${build.dir}"/>
+  </target>
+
+</project>
